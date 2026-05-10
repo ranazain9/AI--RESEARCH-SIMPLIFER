@@ -65,6 +65,3 @@ Citations:
 """,
 input_variables=["context", "question"]
 )
-
-import os
-print(os.getcwd())
