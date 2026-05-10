@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Installs your project dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir --default-timeout=1000 torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu && \
+    pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 
 # Copies all project files into the container
 COPY . .
