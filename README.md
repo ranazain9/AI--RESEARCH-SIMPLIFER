@@ -4,6 +4,14 @@ An advanced **Retrieval-Augmented Generation (RAG)** application designed to tra
 
 ---
 
+## 🌐 Live Deployment
+
+- **🔗 Frontend**: https://ai--research-simplifer.streamlit.app/
+- **🔗 Backend API**: https://ai-research.up.railway.app/
+- **📦 Docker Image**: `ranazain12/ai-app`
+
+---
+
 ## ✨ Features
 
 - **🚀 Automated RAG Pipeline**: Intelligent PDF loading, chunking, and indexing.
@@ -11,7 +19,7 @@ An advanced **Retrieval-Augmented Generation (RAG)** application designed to tra
 - **💬 Structured Answers**: Provides simple explanations, technical details, methodology, and citations.
 - **🏗️ Production-Ready Architecture**: Modular backend, centralized configuration, and containerized deployment.
 - **🎨 Modern UI**: Vibrant Streamlit interface with a premium dark/glassmorphic aesthetic.
-- **🐳 Docker Support**: One-command setup for the entire stack.
+- **🐳 Docker Support**: One-command setup for the entire stack with pre-built Docker image.
 
 ---
 
@@ -59,11 +67,32 @@ An advanced **Retrieval-Augmented Generation (RAG)** application designed to tra
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Docker & Docker Compose
-- Groq API Key
+### Option 1: Use Live Deployment (Recommended)
 
-### One-Command Setup (Docker)
+No setup needed! Just visit the services:
+
+1. **Frontend**: https://ai--research-simplifer.streamlit.app/
+2. **Backend API**: https://ai-research.up.railway.app/
+3. **API Documentation**: https://ai-research.up.railway.app/docs
+
+---
+
+### Option 2: Docker (Local)
+
+Pull and run the pre-built Docker image:
+
+```bash
+docker pull ranazain12/ai-app
+docker run -e GROQ_API_KEY=your_key_here -p 8000:8000 ranazain12/ai-app
+```
+
+Then visit:
+- **API Docs**: http://localhost:8000/docs
+- **Frontend**: Run locally via `streamlit run frontend/streamlit_app.py`
+
+---
+
+### Option 3: Docker Compose (Local Full Stack)
 
 1.  **Clone the repository**:
     ```bash
@@ -78,37 +107,46 @@ An advanced **Retrieval-Augmented Generation (RAG)** application designed to tra
     ```
     Add your `GROQ_API_KEY` to the `.env` file.
 
-3.  **Start the Backend API**:
+3.  **Start the full stack**:
     ```bash
     docker-compose up --build
     ```
 
 4.  **Access the services**:
     - **API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
-    - **Frontend (Run Locally)**:
-      ```bash
-      streamlit run frontend/streamlit_app.py
-      ```
-      The UI will be available at [http://localhost:8501](http://localhost:8501)
+    - **Frontend**: [http://localhost:8501](http://localhost:8501)
 
 ---
 
-### Manual Setup (Development)
+### Option 4: Manual Setup (Development)
 
-1.  **Install dependencies**:
+1.  **Clone and install**:
     ```bash
+    git clone https://github.com/ranazain9/AI--RESEARCH-SIMPLIFER.git
+    cd AI--RESEARCH-SIMPLIFER
     pip install -r requirements.txt
     ```
 
-2.  **Run Backend**:
+2.  **Configure environment**:
     ```bash
-    python -m app.main
+    cp .env.example .env
+    # Edit .env and add your GROQ_API_KEY
     ```
 
-3.  **Run Frontend**:
+3.  **Run Backend**:
+    ```bash
+    uvicorn main:app --reload --host 0.0.0.0 --port 8000
+    ```
+
+4.  **Run Frontend** (in a new terminal):
     ```bash
     streamlit run frontend/streamlit_app.py
     ```
+
+5.  **Access services**:
+    - **Backend API**: http://localhost:8000
+    - **API Docs**: http://localhost:8000/docs
+    - **Frontend**: http://localhost:8501
 
 ---
 
@@ -127,6 +165,61 @@ An advanced **Retrieval-Augmented Generation (RAG)** application designed to tra
 - The system enforces strict RAG rules to prevent hallucinations.
 - If the uploaded paper doesn't contain the answer, the AI will clearly state it.
 - Always check the **Citations** section for evidence-backed answers.
+
+---
+
+## 🚀 Deployment & Infrastructure
+
+### Production Deployment
+
+The application is deployed on the following platforms:
+
+| Service | Platform | URL |
+|---------|----------|-----|
+| **Backend API** | Railway | https://ai-research.up.railway.app/ |
+| **Frontend** | Streamlit Cloud | https://ai--research-simplifer.streamlit.app/ |
+
+### Docker Image
+
+Pre-built Docker image available on Docker Hub:
+
+```bash
+# Pull the image
+docker pull ranazain12/ai-app
+
+# Run the image
+docker run -e GROQ_API_KEY=your_key_here -p 8000:8000 ranazain12/ai-app
+```
+
+**Image Details:**
+- Repository: `ranazain12/ai-app`
+- Latest tag: `latest`
+- Base: Python 3.10
+- Size: Optimized for production
+
+### API Endpoints (Production)
+
+**Base URL**: `https://ai-research.up.railway.app`
+
+- **Swagger UI**: https://ai-research.up.railway.app/docs
+- **ReDoc**: https://ai-research.up.railway.app/redoc
+- **Health**: https://ai-research.up.railway.app/health
+
+### Environment Variables
+
+Required for both local and production deployment:
+
+```bash
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+Optional:
+```bash
+API_HOST=0.0.0.0
+API_PORT=8000
+API_WORKERS=4
+API_LOG_LEVEL=info
+```
 
 ---
 
