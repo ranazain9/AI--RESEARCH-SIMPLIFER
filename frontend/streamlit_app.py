@@ -246,7 +246,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # API Configuration
-API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000")
+API_BASE_URL = os.getenv("API_BASE_URL", "https://ai-research.up.railway.app/")
 UPLOAD_ENDPOINT = f"{API_BASE_URL}/api/upload/"
 QUERY_ENDPOINT = f"{API_BASE_URL}/api/query/"
 
@@ -281,12 +281,12 @@ with st.sidebar:
     st.markdown('<div class="sidebar-header">⚙️ Settings & Debug</div>', unsafe_allow_html=True)
     
     # API Configuration
-    with st.expander("🔗 API Configuration", expanded=False):
-        api_url = st.text_input("API Base URL", value=API_BASE_URL, key="api_url_input")
-        if api_url != API_BASE_URL:
-            API_BASE_URL = api_url
-            UPLOAD_ENDPOINT = f"{API_BASE_URL}/api/upload/"
-            QUERY_ENDPOINT = f"{API_BASE_URL}/api/query/"
+    # with st.expander("🔗 API Configuration", expanded=False):
+    #     api_url = st.text_input("API Base URL", value=API_BASE_URL, key="api_url_input")
+    #     if api_url != API_BASE_URL:
+    #         API_BASE_URL = api_url
+    #         UPLOAD_ENDPOINT = f"{API_BASE_URL}/api/upload/"
+    #         QUERY_ENDPOINT = f"{API_BASE_URL}/api/query/"
     
     st.divider()
     
